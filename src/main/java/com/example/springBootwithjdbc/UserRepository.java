@@ -47,6 +47,32 @@ public class UserRepository {
     	return user;
     	
     }
+    public void delete(int id) {
+    	final String sql="delete from users where id=?";
+    	jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps=con.prepareStatement(sql); 
+				ps.setInt(1, id);
+				return ps;	
+			}
+		});
+    }
     
-    
+    public void update(User user ) {
+    	final String sql="update users set name=?, email=? where id=?";
+    	jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps=con.prepareStatement(sql);
+				ps.setString(1, user.getName());
+				ps.setString(2, user.getEmail());
+				ps.setInt(3, user.getId());
+				return ps;
+			}
+		});
+    	
+    }
 }
