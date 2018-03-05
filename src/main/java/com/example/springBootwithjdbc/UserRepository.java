@@ -29,7 +29,7 @@ public class UserRepository {
 	}
 	
     public User create(final User user) {
-    	final String sql="insert into users(nameiemail) values(?,?)";
+    	final String sql="insert into users(name,email) values(?,?)";
     	KeyHolder holder=new GeneratedKeyHolder();
     	jdbcTemplate.update(new PreparedStatementCreator() {
 			
